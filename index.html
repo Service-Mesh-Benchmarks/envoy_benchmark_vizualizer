@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <title>Visualization</title>
+</head>
+<body>
+    <div>
+    <div style="float:left;">
+        <h1>Envoy Headers</h1>
+        <div>
+    	    <input type="checkbox" id="user-agent" value="0">user-agent<br>
+    	    <input type="checkbox" id="server" value="1">server<br>
+    	    <input type="checkbox" id="x-client-trace-id" value="2">x-client-trace-id<br>
+    	    <input type="checkbox" id="x-envoy-downstream-service-cluster" value="3">x-envoy-downstream-service-cluster<br>
+    	    <input type="checkbox" id="x-envoy-downstream-service-node" value="4">x-envoy-downstream-service-node<br>
+    	    <input type="checkbox" id="x-envoy-external-address" value="5">x-envoy-external-address<br>
+    	    <input type="checkbox" id="x-envoy-force-trace" value="6">x-envoy-force-trace<br>
+    	    <input type="checkbox" id="x-envoy-internal" value="7">x-envoy-internal<br>
+        </div>
+    </div>
+    <div style="float:right;">
+        <h1>Envoy Configuration Options</h1>
+        <div>
+    	    <input type="checkbox" id="add_user_agent" value="0">add_user_agent<br>
+    	    <input type="checkbox" id="server_name" value="1">server_name<br>
+    	    <input type="checkbox" id="cluster" value="2">cluster<br>
+    	    <input type="checkbox" id="forward_client_cert_details" value="3">forward_client_cert_details<br>
+    	    <input type="checkbox" id="set_current_client_cert_details" value="4">set_current_client_cert_details<br>
+    	    <input type="checkbox" id="use_remote_address" value="5">use_remote_address<br>
+    	    <input type="checkbox" id="skip_xff_append" value="6">skip_xff_append<br>
+        </div>
+    </div>
+    </div>
+    <canvas id="myChart" width="400" height="400"></canvas>
+    <script src = "js/index.js"></script>
+</body>
+</html>
