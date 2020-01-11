@@ -8,34 +8,40 @@
     <title>Visualization</title>
 </head>
 <body>
-    <div>
-    <div style="float:left;">
-        <h1>Envoy Headers</h1>
-        <div>
-    	    <input type="checkbox" id="user-agent" value="0">user-agent<br>
-    	    <input type="checkbox" id="server" value="1">server<br>
-    	    <input type="checkbox" id="x-client-trace-id" value="2">x-client-trace-id<br>
-    	    <input type="checkbox" id="x-envoy-downstream-service-cluster" value="3">x-envoy-downstream-service-cluster<br>
-    	    <input type="checkbox" id="x-envoy-downstream-service-node" value="4">x-envoy-downstream-service-node<br>
-    	    <input type="checkbox" id="x-envoy-external-address" value="5">x-envoy-external-address<br>
-    	    <input type="checkbox" id="x-envoy-force-trace" value="6">x-envoy-force-trace<br>
-    	    <input type="checkbox" id="x-envoy-internal" value="7">x-envoy-internal<br>
+    <div class="row">
+        <div class="left_column">
+            <h1>Envoy Headers</h1>
+            <div>
+        	    <input type="checkbox" id="user-agent" value="0">user-agent<br>
+        	    <input type="checkbox" id="server" value="1">server<br>
+        	    <input type="checkbox" id="x-client-trace-id" value="2">x-client-trace-id<br>
+        	    <input type="checkbox" id="x-envoy-downstream-service-cluster" value="3">x-envoy-downstream-service-cluster<br>
+        	    <input type="checkbox" id="x-envoy-downstream-service-node" value="4">x-envoy-downstream-service-node<br>
+        	    <input type="checkbox" id="x-envoy-external-address" value="5">x-envoy-external-address<br>
+        	    <input type="checkbox" id="x-envoy-force-trace" value="6">x-envoy-force-trace<br>
+        	    <input type="checkbox" id="x-envoy-internal" value="7">x-envoy-internal<br>
+            </div>
+        </div>
+        <div class="right_column">
+            <h1>Envoy Configuration Options</h1>
+            <div>
+        	    <input type="checkbox" id="add_user_agent" value="0">add_user_agent<br>
+        	    <input type="checkbox" id="server_name" value="1">server_name<br>
+        	    <input type="checkbox" id="cluster" value="2">cluster<br>
+        	    <input type="checkbox" id="forward_client_cert_details" value="3">forward_client_cert_details<br>
+        	    <input type="checkbox" id="set_current_client_cert_details" value="4">set_current_client_cert_details<br>
+        	    <input type="checkbox" id="use_remote_address" value="5">use_remote_address<br>
+        	    <input type="checkbox" id="skip_xff_append" value="6">skip_xff_append<br>
+            </div>
         </div>
     </div>
-    <div style="float:right;">
-        <h1>Envoy Configuration Options</h1>
-        <div>
-    	    <input type="checkbox" id="add_user_agent" value="0">add_user_agent<br>
-    	    <input type="checkbox" id="server_name" value="1">server_name<br>
-    	    <input type="checkbox" id="cluster" value="2">cluster<br>
-    	    <input type="checkbox" id="forward_client_cert_details" value="3">forward_client_cert_details<br>
-    	    <input type="checkbox" id="set_current_client_cert_details" value="4">set_current_client_cert_details<br>
-    	    <input type="checkbox" id="use_remote_address" value="5">use_remote_address<br>
-    	    <input type="checkbox" id="skip_xff_append" value="6">skip_xff_append<br>
-        </div>
+    <div class="row">
+        <canvas id="myChart" width="500px" height="400px" class="left_column"></canvas>
     </div>
+    <div class="row">
+	<img id="flamegraph_envoy" width="400px" class="left_column" src="https://www.w3schools.com/howto/img_forest.jpg" alt="flamegraph_envoy">
     </div>
-    <canvas id="myChart" width="400" height="400"></canvas>
+	
     <script src = "js/index.js"></script>
 </body>
 </html>

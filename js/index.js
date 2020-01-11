@@ -48,8 +48,8 @@ var options = {
     },
     legend: {
 	    display: true
-    }
-    
+    },
+    responsive: false
 }
 
 const chart = new Chart(ctx, {
@@ -91,11 +91,15 @@ const update_page = () => {
 
 	const rate = "100", concurrency = "4", duration = "10"
 
-	const baseline_url = `http://localhost:8000/${header_profile}/${rate}/${concurrency}/${duration}/none/vegeta.bin`
-	const envoy_url = `http://localhost:8000/${header_profile}/${rate}/${concurrency}/${duration}/${config_profile}/vegeta_success.plot`
-	fetch(baseline_url).then(req => req.json()).then(_ => draw(_["data"], 0))
-	fetch(envoy_url).then(req => req.json()).then(_ => draw(_["data"], 1))
+	const root_url = `http://localhost:8000/${header_profile}/${rate}/${concurrency}/${duration}`
+	const baseline_vegeta_url = `${root_url}/none/vegeta.bin`
+	const envoy_vegeta_url = `${root_url}/${config_profile}/vegeta_success.plot`
+	const flamegraph_url = `${root_url}/${config_profile}/perf.svg`
 
+	fetch(baseline_vegeta_url).then(req => req.json()).then(_ => draw(_["data"], 0))
+	fetch(envoy_vegeta_url).then(req => req.json()).then(_ => draw(_["data"], 1))
+
+	document.getElementById("flamegraph_envoy").src = flamegraph_url
 }
 
 const draw = (series, label_index) => { 

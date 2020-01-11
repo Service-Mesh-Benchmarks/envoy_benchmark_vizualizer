@@ -1,1 +1,19 @@
 /**/
+
+* {
+  box-sizing: border-box;
+}
+
+.left_column {
+	order: 0;
+}
+
+.right_column {
+	order: 1;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}

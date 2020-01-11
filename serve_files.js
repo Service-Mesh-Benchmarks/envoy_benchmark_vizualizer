@@ -23,7 +23,9 @@ app.get('/:headers/:rate/:concurrency/:duration/:configs/:file', function (req, 
   	if (req.params.file === "vegeta_success.plot" || req.params.file === "vegeta.bin" ) {
       		series_data = parse_vegeta_file(filename)
       		res.json({data: series_data})
-  	} else {
+  	} else if (req.params.file === "perf.svg") {
+		res.sendFile(filename, {root: __dirname});
+	} else {
      		res.json({data: 'File Not Found'})
   	}
 })
