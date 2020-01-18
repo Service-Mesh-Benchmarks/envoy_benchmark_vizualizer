@@ -13,8 +13,11 @@ var data = {
       label: "Envoy",
       backgroundColor: 'rgba(0, 0, 255, 1)',
       data: [],
+    }, {
+      label: "Difference",
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      data: [],
     }
-
   ]
 };
 
@@ -24,6 +27,12 @@ var options = {
         xAxes: [{
             type: 'linear',
             position: 'bottom',
+	    ticks: {
+		    beginAtZero: true,
+		    fontSize: 14,
+		    max: 1.0,
+		    min: 0
+	    },
 	    scalelabel: {
 		    display: true,
 		    labelString: "Percentile",
@@ -33,7 +42,9 @@ var options = {
         yAxes: [{
             ticks: {
 		    beginAtZero: true,
-		    fontSize: 14
+		    fontSize: 14,
+		    max: 2.5,
+		    min: 0
 	    },
 	    scalelabel: {
 		    display: true,
@@ -89,17 +100,32 @@ const update_page = () => {
 		config => document.getElementById(config).checked ? "1": "0"
 	).join("")
 
+	
 	const rate = "100", concurrency = "4", duration = "10"
-
 	const root_url = `http://localhost:8000/${header_profile}/${rate}/${concurrency}/${duration}`
-	const baseline_vegeta_url = `${root_url}/none/vegeta.bin`
-	const envoy_vegeta_url = `${root_url}/${config_profile}/vegeta_success.plot`
 	const flamegraph_url = `${root_url}/${config_profile}/perf.svg`
 
-	fetch(baseline_vegeta_url).then(req => req.json()).then(_ => draw(_["data"], 0))
-	fetch(envoy_vegeta_url).then(req => req.json()).then(_ => draw(_["data"], 1))
+	get_data_and_draw(root_url, config_profile)
 
 	document.getElementById("flamegraph_envoy").src = flamegraph_url
+}
+
+const get_data_and_draw = async (root_url, config_profile) => {
+	
+
+	const baseline_vegeta_url = `${root_url}/none/vegeta.bin`
+	const envoy_vegeta_url = `${root_url}/${config_profile}/vegeta_success.plot`
+
+	const baseline_data = await fetch(baseline_vegeta_url).then(req => req.json()).then(_ => _["data"])
+	const envoy_data = await fetch(envoy_vegeta_url).then(req => req.json()).then(_ => _["data"])
+	const difference = envoy_data.map((datapoint, index) => [datapoint[0] - baseline_data[index][0], datapoint[1]])
+	console.log(difference)
+	console.log(envoy_data)
+
+	draw(baseline_data, 0)
+	draw(envoy_data, 1)
+	draw(difference, 2)
+
 }
 
 const draw = (series, label_index) => { 
